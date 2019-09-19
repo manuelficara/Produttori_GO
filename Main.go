@@ -8,12 +8,12 @@ import (
 )
 
 type Produttore struct {
-	nome string
+	nome    string
 	modelli []Modello
 }
 
 type Modello struct {
-	nome string
+	nome      string
 	accessori []string
 }
 
@@ -34,14 +34,14 @@ func main() {
 						for _, line2 := range lines2 {
 							parts2 := strings.Split(line2, " ")
 							if lines3, err := readLines(parts2[1]); err == nil {
-								modelli = append(modelli, Modello{nome:parts2[0], accessori:lines3})
+								modelli = append(modelli, Modello{nome: parts2[0], accessori: lines3})
 							}
 						}
 					}
-					produttori = append(produttori, Produttore{nome:parts[0], modelli:modelli})
+					produttori = append(produttori, Produttore{nome: parts[0], modelli: modelli})
 				}
 			}
-			for{
+			for {
 				sel = menu()
 				var nome string
 				switch sel {
@@ -147,7 +147,7 @@ func main() {
 
 func fileExists(path string) (bool, error) {
 	_, err := os.Stat(path)
-	if err == nil{
+	if err == nil {
 		return true, nil
 	}
 	if os.IsNotExist(err) {
@@ -198,7 +198,7 @@ func getModello(nome string, produttori []Produttore) (*Modello, error) {
 	return nil, err
 }
 
-func getProduttoreByModello(modello Modello, produttori []Produttore) (*Produttore, error){
+func getProduttoreByModello(modello Modello, produttori []Produttore) (*Produttore, error) {
 	for _, p := range produttori {
 		for _, m := range p.modelli {
 			if modello.nome == m.nome {
