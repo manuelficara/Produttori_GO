@@ -145,6 +145,12 @@ func main() {
 	}
 }
 
+/**
+Questo metodo viene utilizzato per controllare
+se il file passato come parametro esiste.
+Nel caso non fosse possibile trovare il file,
+ritornerà false e l'errore generato.
+*/
 func fileExists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err == nil {
@@ -156,6 +162,13 @@ func fileExists(path string) (bool, error) {
 	return true, err
 }
 
+/**
+Questo metodo viene utilizzato per leggere
+tutte le linee da un file e ritornarle.
+Nel caso non fosse possibile leggere le
+linee, ritornerà un errore e l'array di
+stringhe vuoto.
+*/
 func readLines(path string) ([]string, error) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -169,6 +182,11 @@ func readLines(path string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
+/**
+Questo metodo viene utilizzato per mostrare
+un menù di scelta all'utente. Ritorna il
+valore inserito in input dall'utente (int).
+*/
 func menu() int {
 	fmt.Println("\nScegli una delle seguenti opzioni:\n1: Visualizza l'elenco dei modelli di un produttore\n2: Visualizza l'elenco degli accessori di un modello\n3: Cancella totalmente un produttore\n4: Cancella totalmente un modello\n5: Cancella un accessorio\n6: Incorpora un produttore in un altro\n0: Esci\nScelta: ")
 	var sel int
@@ -176,6 +194,12 @@ func menu() int {
 	return sel
 }
 
+/**
+Questo metodo viene utilizzato per ritornare
+un Produttore dati come parametri il nome e
+l'array di Produttori. Ritorna il puntatore
+al Produttore, e l'errore (se presente).
+*/
 func getProduttore(nome string, produttori []Produttore) (*Produttore, error) {
 	for _, p := range produttori {
 		if strings.ToLower(p.nome) == strings.ToLower(nome) {
@@ -186,6 +210,12 @@ func getProduttore(nome string, produttori []Produttore) (*Produttore, error) {
 	return nil, err
 }
 
+/**
+Questo metodo viene utilizzato per ritornare
+un Modello dati come parametri il nome e
+l'array di Produttori. Ritorna il puntatore
+al Modello, e l'errore (se presente).
+*/
 func getModello(nome string, produttori []Produttore) (*Modello, error) {
 	for _, p := range produttori {
 		for _, m := range p.modelli {
@@ -198,6 +228,12 @@ func getModello(nome string, produttori []Produttore) (*Modello, error) {
 	return nil, err
 }
 
+/**
+Questo metodo viene utilizzato per ritornare
+un Produttore dati come parametri un Modello e
+l'array di Produttori. Ritorna il puntatore al
+Produttore, e l'errore (se presente).
+*/
 func getProduttoreByModello(modello Modello, produttori []Produttore) (*Produttore, error) {
 	for _, p := range produttori {
 		for _, m := range p.modelli {
